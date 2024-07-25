@@ -15,10 +15,12 @@ Before you begin, ensure you have met the following requirements:
 
    ```bash
    git clone https://github.com/saiganesh1976/Login_SignUp-using-Nodejs-and-Express
+   
 2. **Navigate into the project directory**
    
     ```bash
-    cd your-repo-name
+    cd Login_SignUp-using-Nodejs-and-Express
+    
 3. **Install dependencies**
 
     ```bash
