@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SignUp</title>
+  </head>
+  <body>
+    <h1>Create a user</h1>
+    <label for="username">Username: </label>
+    <input type="text" id="username" />
+    <br />
+    <br />
+    <label for="password">Password:</label>
+    <input type="password" id="password" />
+    <br />
+    <br />
+    <span><a href="./login.html">Already have an account?</a></span>
+    <br />
+    <br />
+    <button type="button" id="Submit">Submit</button>
+    <br />
+    <script>
+      document.getElementById("Submit").addEventListener("click", async (e) => {
+        e.preventDefault();
+        let username = document.getElementById("username").value;
+        let password = document.getElementById("password").value;
+
+        console.log(username);
+        console.log(password);
+
+        try {
+          let response = await fetch("http://localhost:3000/Signup", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ username, password }),
+          });
+
+          if (response.ok) {
+            let result = await response.json();
+            console.log("User registered", result);
+            alert("User registered successfully!");
+            window.location.href="./login.html"
+          } else {
+            console.error("Registration failed");
+            alert("User registration failed");
+          }
+        } catch (error) {
+          console.error("Error", error);
+        }
+      });
+    </script>
+  </body>
+</html>

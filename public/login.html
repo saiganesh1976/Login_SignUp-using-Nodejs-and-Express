@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Page</title>
+  </head>
+  <body>
+    <h1>Login Page</h1>
+    <label for="username">Username: </label>
+    <input type="text" name="username" id="username" />
+    <br />
+    <br />
+    <label for="password">Password:</label>
+    <input type="password" name="password" id="password" />
+    <br />
+    <br />
+    <span><a href="./Signup.html">Donot have an Account?</a></span>
+    <br />
+    <br />
+    <button type="button" id="Submit">Submit</button>
+    <script>
+      document.getElementById("Submit").addEventListener("click", async (e) => {
+        e.preventDefault();
+        let username = document.getElementById("username").value;
+        let password = document.getElementById("password").value;
+
+        try {
+          let response = await fetch("http://localhost:3000/Login", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ username, password }), 
+          });
+
+          if (response.ok) {
+            let result = await response.json();
+            console.log("Login successful", result);
+            alert("Login successful!");
+          } else {
+            console.error("Login failed");
+            alert("Login failed");
+          }
+        } catch (error) {
+          console.error("Error", error);
+        }
+      });
+    </script>
+  </body>
+</html>
